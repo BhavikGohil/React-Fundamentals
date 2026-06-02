@@ -1,0 +1,33 @@
+{
+  "customers": [
+    {
+      "name": "John AB",
+      "email": "john@example.com",
+      "phone": "9832032030",
+      "status": "active",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "name": "Priya Sharma",
+      "email": "priya@example.com",
+      "phone": "9876543211",
+      "status": "inactive"
+    },
+    {
+      "name": "Rishi",
+      "email": "rishi@mail.com",
+      "phone": "9539512525",
+      "status": "active",
+      "id": "RKcnEQf6EOo"
+    },
+    {
+      "name": "Nikunj",
+      "email": "nikunj@mail.com",
+      "phone": "9874561212",
+      "status": "inactive",
+      "id": "bw60EppdDkU"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
