@@ -15,12 +15,12 @@ const LoginPage = () => {
     }
   }, [token, navigate]);
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-100 px-4">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow">
-        <h1 className="mb-2 text-2xl font-bold text-slate-900">
+    <div className="flex min-h-screen items-center justify-center bg-slate-100 px-4 dark:bg-slate-950">
+      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow dark:bg-slate-900">
+        <h1 className="mb-2 text-2xl font-bold text-slate-900 dark:text-white">
           Enterprise CRM
         </h1>
-        <p className="mb-6 text-sm text-slate-500">
+        <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
           Login with admin credentials
         </p>
 
@@ -49,7 +49,7 @@ const LoginPage = () => {
                 </div>
               )}
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700">
+                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
                   Email
                 </label>
                 <input
@@ -57,7 +57,7 @@ const LoginPage = () => {
                   name="email"
                   value={values.email}
                   onChange={handleChange}
-                  className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-slate-900"
+                  className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none focus:border-slate-900 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-white"
                   placeholder="admin@test.com"
                 />
                 {touched.email && errors.email && (
@@ -65,7 +65,7 @@ const LoginPage = () => {
                 )}
               </div>
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-700">
+                <label className="mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
                   Password
                 </label>
                 <input
@@ -73,7 +73,7 @@ const LoginPage = () => {
                   name="password"
                   value={values.password}
                   onChange={handleChange}
-                  className="w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-slate-900"
+                  className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none focus:border-slate-900 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-white"
                   placeholder="Password@123"
                 />
                 {touched.password && errors.password && (
@@ -83,14 +83,14 @@ const LoginPage = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full rounded-md bg-slate-900 px-4 py-2 font-medium text-white disabled:cursor-not-allowed disabled:bg-slate-400"
+                className="w-full rounded-md bg-slate-900 px-4 py-2 font-medium text-white dark:bg-white dark:text-slate-900 disabled:cursor-not-allowed disabled:bg-slate-400"
               >
                 {loading ? "Login in.." : "Login"}
               </button>
             </form>
           )}
         </Formik>
-        <div className="mt-6 rounded-md bg-slate-50 p-4 text-sm text-slate-600">
+        <div className="mt-6 rounded-md bg-slate-50 p-4 text-sm text-slate-600 dark:bg-slate-950 dark:text-slate-300">
           <p>Email: admin@test.com</p>
           <p>Password: 123456</p>
         </div>

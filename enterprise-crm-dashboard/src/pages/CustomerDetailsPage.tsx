@@ -32,22 +32,22 @@ const CustomerDetailsPage = () => {
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
           Customer Details
         </h1>
 
-        <Link to="/customers" className="text-sm font-medium text-slate-600">
+        <Link to="/customers" className="text-sm font-medium text-slate-600 dark:text-slate-300">
           Back to Customers
         </Link>
       </div>
 
-      <div className="rounded-lg bg-white p-6 shadow">
+      <div className="rounded-lg bg-white p-6 shadow dark:bg-slate-900">
         <div className="mb-6 flex items-start justify-between">
           <div>
-            <h2 className="text-xl font-bold text-slate-900">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white">
               {selectedCustomer.name}
             </h2>
-            <p className="text-sm text-slate-500">{selectedCustomer.email}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400">{selectedCustomer.email}</p>
           </div>
 
           <span
@@ -64,19 +64,19 @@ const CustomerDetailsPage = () => {
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <p className="text-sm text-slate-500">Customer ID</p>
-            <p className="font-medium text-slate-900">{selectedCustomer.id}</p>
+            <p className="font-medium text-slate-900 dark:text-white">{selectedCustomer.id}</p>
           </div>
 
           <div>
             <p className="text-sm text-slate-500">Phone</p>
-            <p className="font-medium text-slate-900">
+            <p className="font-medium text-slate-900 dark:text-white">
               {selectedCustomer.phone}
             </p>
           </div>
 
           <div>
             <p className="text-sm text-slate-500">Email</p>
-            <p className="font-medium text-slate-900">
+            <p className="font-medium text-slate-900 dark:text-white">
               {selectedCustomer.email}
             </p>
           </div>
@@ -92,7 +92,7 @@ const CustomerDetailsPage = () => {
         <div className="mt-6">
           <Link
             to={`/customers/${selectedCustomer.id}/edit`}
-            className="rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white"
+           className="rounded-md bg-slate-900 px-4 py-2 text-center text-sm font-medium text-white dark:bg-white dark:text-slate-900"
           >
             Edit Customer
           </Link>

@@ -44,14 +44,16 @@ const CustomerListPage = () => {
     <div>
       <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Customers</h1>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+            Customers
+          </h1>
           <p className="text-sm text-slate-500">
             Manage customer records and account status
           </p>
         </div>
         <Link
           to="/customers/add"
-          className="rounded-md bg-slate-900 px-4 py-2 text-center text-sm font-medium text-white flex items-center gap-2"
+          className="rounded-md bg-slate-900 px-4 py-2 text-center text-sm font-medium text-white dark:bg-white dark:text-slate-900 flex items-center gap-2"
         >
           <Plus size={18} />
           Add Customer
@@ -63,7 +65,7 @@ const CustomerListPage = () => {
           value={searchTerm}
           onChange={(event) => dispatch(setSearchTerm(event.target.value))}
           placeholder="Search by name or email"
-          className="rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-slate-900"
+         className="rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none focus:border-slate-900 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-white"
         />
         <select
           value={statusFilter}
@@ -72,7 +74,7 @@ const CustomerListPage = () => {
               setStatusFilter(e.target.value as "all" | "active" | "inactive"),
             )
           }
-          className="rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-slate-900"
+         className="rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none focus:border-slate-900 dark:border-slate-700 dark:bg-slate-950 dark:text-white dark:focus:border-white"
         >
           <option value="all">All Customers</option>
           <option value="active">Active Customers</option>
@@ -87,9 +89,9 @@ const CustomerListPage = () => {
         </div>
       )}
       {!loading && !error && (
-        <div className="overflow-x-auto rounded-lg bg-white shadow">
+        <div className="overflow-x-auto rounded-lg bg-white shadow dark:bg-slate-900">
           <table className="w-full border-collapse text-left text-sm">
-            <thead className="bg-slate-100 text-slate-700">
+            <thead className="bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200">
               <tr>
                 <th className="px-4 py-3">Name</th>
                 <th className="px-4 py-3">Email</th>
@@ -100,12 +102,12 @@ const CustomerListPage = () => {
             </thead>
             <tbody>
               {filteredCustomers.map((customer) => (
-                <tr key={customer.id}>
-                  <td className="px-4 py-3 font-medium text-slate-900">
+                <tr key={customer.id} className="border-t border-slate-200 dark:border-slate-800">
+                  <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">
                     {customer.name}
                   </td>
-                  <td className="px-4 py-3 text-slate-600">{customer.email}</td>
-                  <td className="px-4 py-3 text-slate-600">{customer.phone}</td>
+                  <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{customer.email}</td>
+                  <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{customer.phone}</td>
                   <td className="px-4 py-3">
                     <span
                       className={`rounded-full px-3 py-1 text-xs font-medium ${
@@ -118,22 +120,22 @@ const CustomerListPage = () => {
                     </span>
                   </td>
                   <td className="space-x-2 px-4 py-3 text-right">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-end gap-2 w-full">
                       <Link
                         to={`/customers/${customer.id}`}
-                        className="text-sm font-medium text-slate-700"
+                        className="text-sm font-medium text-slate-700 dark:text-slate-400"
                       >
                         <Eye size={18} />
                       </Link>
                       <Link
                         to={`/customers/${customer.id}/edit`}
-                        className="text-sm font-medium text-blue-600"
+                        className="text-sm font-medium text-blue-600 dark:text-blue-400"
                       >
                         <Edit size={18} />
                       </Link>
                       <button
                         onClick={() => handleDelete(customer.id)}
-                        className="text-sm font-medium text-red-600"
+                        className="text-sm font-medium text-red-600 dark:text-red-400"
                       >
                         <Trash2 size={18} />
                       </button>

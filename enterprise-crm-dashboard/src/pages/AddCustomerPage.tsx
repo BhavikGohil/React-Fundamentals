@@ -22,7 +22,7 @@ const AddCustomerPage = () => {
   return (
     <div>
       <h1 className="mb-6 text-2xl font-bold text-slate-900">Add Customer</h1>
-      <div className="rounded-lg bg-white p-6 shadow">
+      <div className="rounded-lg bg-white p-6 shadow dark:bg-slate-900">
         <CustomerForm
           initialValues={initialValues}
           buttonText="Add Customer"

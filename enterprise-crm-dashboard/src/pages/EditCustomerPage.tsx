@@ -50,13 +50,13 @@ const EditCustomerPage = () => {
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-900">Edit Customer</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Edit Customer</h1>
 
         <Link to="/customers" className="text-sm font-medium text-slate-600">
           Back to Customers
         </Link>
       </div>
-      <div className="rounded-lg bg-white p-6 shadow">
+      <div className="rounded-lg bg-white p-6 shadow dark:bg-slate-900">
         <CustomerForm
           initialValues={initialValues}
           buttonText="Update Customer"
