@@ -6,12 +6,12 @@
       "email": "john@example.com",
       "phone": "9832032030",
       "status": "active",
-      "isArchived": true,
+      "isArchived": false,
       "revenue": 120000,
       "createdBy": "Admin",
       "updatedBy": "Admin",
       "createdAt": "2026-06-01T10:00:00Z",
-      "updatedAt": "2026-06-03T12:40:43.031Z"
+      "updatedAt": "2026-06-03T13:40:33.095Z"
     },
     {
       "id": "2",
@@ -51,6 +51,32 @@
       "updatedBy": "Admin",
       "createdAt": "2026-06-02T11:00:00Z",
       "updatedAt": "2026-06-03T12:35:26.738Z"
+    },
+    {
+      "name": "Arya",
+      "email": "arya@mail.com",
+      "phone": "9876542110",
+      "status": "active",
+      "revenue": 8000,
+      "isArchived": false,
+      "createdBy": "Admin",
+      "updatedBy": "Admin",
+      "createdAt": "2026-06-03T13:32:05.784Z",
+      "updatedAt": "2026-06-03T13:32:29.961Z",
+      "id": "ARKREfNBLMQ"
+    },
+    {
+      "name": "John AB",
+      "email": "john@example.com",
+      "phone": "9876543210",
+      "status": "active",
+      "revenue": 9500,
+      "isArchived": false,
+      "createdBy": "Admin",
+      "updatedBy": "Admin",
+      "createdAt": "2026-06-03T13:33:11.380Z",
+      "updatedAt": "2026-06-03T13:40:23.264Z",
+      "id": "k3uXdNEVHoQ"
     }
   ],
   "contacts": [
@@ -123,6 +149,15 @@
       "createdBy": "Admin",
       "createdAt": "2026-06-03T12:35:02.470Z",
       "id": "AkigIcBVrjU"
+    },
+    {
+      "type": "meeting",
+      "title": "Daily Standup",
+      "description": "Daily Standup to discuss about completed and pending task.",
+      "customerId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T13:42:44.397Z",
+      "id": "tZNUDz9GPmQ"
     }
   ],
   "notifications": [
@@ -139,6 +174,20 @@
       "message": "John AB profile was updated.",
       "isRead": true,
       "createdAt": "2026-06-03T10:00:00Z"
+    },
+    {
+      "title": "Customer updated",
+      "message": "John AB profile was updated.",
+      "isRead": false,
+      "createdAt": "2026-06-03T13:40:23.283Z",
+      "id": "aumBkFJBDRo"
+    },
+    {
+      "title": "Customer restored",
+      "message": "John AB was restored.",
+      "isRead": false,
+      "createdAt": "2026-06-03T13:40:33.117Z",
+      "id": "nYnTXI1o624"
     }
   ],
   "auditLogs": [
@@ -245,6 +294,46 @@
       "createdBy": "Admin",
       "createdAt": "2026-06-03T12:40:43.055Z",
       "id": "YJaOpXsSWQA"
+    },
+    {
+      "action": "CREATE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "ARKREfNBLMQ",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T13:32:05.808Z",
+      "id": "nLJvqom0AG8"
+    },
+    {
+      "action": "UPDATE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "ARKREfNBLMQ",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T13:32:29.983Z",
+      "id": "yqZD6Visol0"
+    },
+    {
+      "action": "CREATE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "k3uXdNEVHoQ",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T13:33:11.404Z",
+      "id": "M-y9sc4DeQA"
+    },
+    {
+      "action": "UPDATE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "k3uXdNEVHoQ",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T13:40:23.283Z",
+      "id": "22oxIUT-_Hg"
+    },
+    {
+      "action": "RESTORE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T13:40:33.117Z",
+      "id": "KeTirwLKAZw"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

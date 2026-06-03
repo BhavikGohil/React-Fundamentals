@@ -5,6 +5,7 @@ import { createAuditLog } from "../store/auditLog/auditLogThunk";
 import { addCustomer } from "../store/customer/customerThunk";
 import type { CustomerFormValues } from "../types/customerTypes";
 import CustomerForm from "../components/Forms/CustomerForm";
+import { createNotification } from "../store/notification/notificationThunk";
 
 const AddCustomerPage = () => {
   const dispatch = useAppDispatch();
@@ -18,19 +19,27 @@ const AddCustomerPage = () => {
     revenue: 0,
   };
 
-  const handleSubmit = async (values: CustomerFormValues) => {
-    const customer = await dispatch(addCustomer(values)).unwrap();
+const handleSubmit = async (values: CustomerFormValues) => {
+  const customer = await dispatch(addCustomer(values)).unwrap();
 
-    dispatch(
-      createAuditLog({
-        action: "CREATE_CUSTOMER",
-        entity: "Customer",
-        entityId: customer.id,
-      })
-    );
+  dispatch(
+    createAuditLog({
+      action: "CREATE_CUSTOMER",
+      entity: "Customer",
+      entityId: customer.id,
+    })
+  );
 
-    navigate("/customers");
-  };
+  dispatch(
+    createNotification({
+      title: "Customer added",
+      message: `${customer.name} was added successfully.`,
+      isRead: false,
+    })
+  );
+
+  navigate("/customers");
+};
 
   return (
     <div>

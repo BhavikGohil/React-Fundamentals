@@ -46,10 +46,13 @@ export const dashboardService = {
   },
 
   getRecentActivities: async () => {
-    const response = await api.get<Activity[]>(
-      "/activities?_sort=createdAt&_order=desc&_limit=5"
-    );
+    const response = await api.get<Activity[]>("/activities");
 
-    return response.data;
+    return response.data
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )
+      .slice(0, 5);
   },
 };

@@ -13,6 +13,20 @@ export const fetchNotifications = createAsyncThunk(
   }
 );
 
+export const createNotification = createAsyncThunk(
+  "notification/createNotification",
+  async (
+    notification: Omit<AppNotification, "id" | "createdAt">,
+    { rejectWithValue }
+  ) => {
+    try {
+      return await notificationService.create(notification);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const markNotificationAsRead = createAsyncThunk(
   "notification/markNotificationAsRead",
   async (notification: AppNotification, { rejectWithValue }) => {

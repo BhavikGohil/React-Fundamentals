@@ -6,6 +6,7 @@ import {
   fetchCustomers,
   restoreCustomer,
 } from "../store/customer/customerThunk";
+import { createNotification } from "../store/notification/notificationThunk";
 
 const ArchivedCustomersPage = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +29,14 @@ const ArchivedCustomersPage = () => {
         action: "RESTORE_CUSTOMER",
         entity: "Customer",
         entityId: restored.id,
-      })
+      }),
+    );
+    dispatch(
+      createNotification({
+        title: "Customer restored",
+        message: `${restored.name} was restored.`,
+        isRead: false,
+      }),
     );
   };
 
@@ -44,7 +52,9 @@ const ArchivedCustomersPage = () => {
       </div>
 
       {loading ? (
-        <p className="text-slate-600 dark:text-slate-300">Loading archived customers...</p>
+        <p className="text-slate-600 dark:text-slate-300">
+          Loading archived customers...
+        </p>
       ) : (
         <div className="overflow-x-auto rounded-lg bg-white shadow dark:bg-slate-900">
           <table className="w-full border-collapse text-left text-sm">
@@ -60,7 +70,10 @@ const ArchivedCustomersPage = () => {
 
             <tbody>
               {archivedCustomers.map((customer) => (
-                <tr key={customer.id} className="border-t border-slate-200 dark:border-slate-800">
+                <tr
+                  key={customer.id}
+                  className="border-t border-slate-200 dark:border-slate-800"
+                >
                   <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">
                     {customer.name}
                   </td>
@@ -87,7 +100,10 @@ const ArchivedCustomersPage = () => {
 
               {archivedCustomers.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="px-4 py-6 text-center text-slate-500 dark:text-slate-400">
+                  <td
+                    colSpan={5}
+                    className="px-4 py-6 text-center text-slate-500 dark:text-slate-400"
+                  >
                     No archived customers found
                   </td>
                 </tr>

@@ -11,6 +11,15 @@ export const notificationService = {
     );
   },
 
+  create: async (notification: Omit<AppNotification, "id" | "createdAt">) => {
+    const response = await api.post<AppNotification>("/notifications", {
+      ...notification,
+      createdAt: new Date().toISOString(),
+    });
+
+    return response.data;
+  },
+
   markAsRead: async (notification: AppNotification) => {
     const response = await api.patch<AppNotification>(
       `/notifications/${notification.id}`,

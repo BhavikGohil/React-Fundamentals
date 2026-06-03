@@ -9,6 +9,7 @@ import {
   updateCustomer,
 } from "../store/customer/customerThunk";
 import type { CustomerFormValues } from "../types/customerTypes";
+import { createNotification } from "../store/notification/notificationThunk";
 
 const EditCustomerPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -39,24 +40,32 @@ const EditCustomerPage = () => {
     revenue: selectedCustomer.revenue,
   };
 
-  const handleSubmit = async (values: CustomerFormValues) => {
-    const updated = await dispatch(
-      updateCustomer({
-        ...selectedCustomer,
-        ...values,
-      })
-    ).unwrap();
+const handleSubmit = async (values: CustomerFormValues) => {
+  const updated = await dispatch(
+    updateCustomer({
+      ...selectedCustomer,
+      ...values,
+    })
+  ).unwrap();
 
-    dispatch(
-      createAuditLog({
-        action: "UPDATE_CUSTOMER",
-        entity: "Customer",
-        entityId: updated.id,
-      })
-    );
+  dispatch(
+    createAuditLog({
+      action: "UPDATE_CUSTOMER",
+      entity: "Customer",
+      entityId: updated.id,
+    })
+  );
 
-    navigate("/customers");
-  };
+  dispatch(
+    createNotification({
+      title: "Customer updated",
+      message: `${updated.name} profile was updated.`,
+      isRead: false,
+    })
+  );
+
+  navigate("/customers");
+};
 
   return (
     <div>
