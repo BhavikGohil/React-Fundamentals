@@ -1,21 +1,24 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { LoginPayload } from "../../types/authTypes";
+import { authService } from "../../services/authServices";
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
-  async (payload: LoginPayload, { rejectWithValue }) => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    if (payload.email === "admin@test.com" && payload.password === "123456") {
-      return {
-        user: {
-          id: "1",
-          name: "Admin",
-          email: payload.email,
-        },
-        token:"fake-jwt-token",
-      };
+ async (payload: LoginPayload, { rejectWithValue }) => {
+    try {
+      return await authService.login(payload);
+    } catch (error) {
+      return rejectWithValue(error);
     }
-    return rejectWithValue("Invalid email or paddword");
-  },
+  }
+);
+export const refreshUserToken = createAsyncThunk(
+  "auth/refreshUserToken",
+  async (_, { rejectWithValue }) => {
+    try {
+      return await authService.refreshToken();
+    } catch {
+      return rejectWithValue("Session expired. Please login again.");
+    }
+  }
 );

@@ -1,41 +1,53 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-type ThemeMode = "light" | "dark";
+export type ThemeMode = "light" | "dark";
 
 interface ThemeState {
   mode: ThemeMode;
 }
 
-const savedTheme = localStorage.getItem("theme") as ThemeMode | null;
+const getInitialTheme = (): ThemeMode => {
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark" || savedTheme === "light") {
+    return savedTheme;
+  }
+
+  return "light";
+};
+
+const setDocumentTheme = (mode: ThemeMode) => {
+  document.documentElement.classList.toggle("dark", mode === "dark");
+};
 
 const initialState: ThemeState = {
-  mode: savedTheme || "light",
+  mode: getInitialTheme(),
 };
+
+setDocumentTheme(initialState.mode);
 
 const themeSlice = createSlice({
   name: "theme",
   initialState,
   reducers: {
     toggleTheme: (state) => {
-      state.mode = state.mode === "light" ? "dark" : "light";
-      localStorage.setItem("theme", state.mode);
+      const nextMode = state.mode === "light" ? "dark" : "light";
 
-      if (state.mode === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
+      state.mode = nextMode;
+      localStorage.setItem("theme", nextMode);
+      setDocumentTheme(nextMode);
+    },
+    setTheme: (state, action: PayloadAction<ThemeMode>) => {
+      state.mode = action.payload;
+      localStorage.setItem("theme", action.payload);
+      setDocumentTheme(action.payload);
     },
     applyTheme: (state) => {
-      if (state.mode === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
+      setDocumentTheme(state.mode);
     },
   },
 });
 
-export const { toggleTheme, applyTheme } = themeSlice.actions;
+export const { toggleTheme, setTheme, applyTheme } = themeSlice.actions;
 
 export default themeSlice.reducer;

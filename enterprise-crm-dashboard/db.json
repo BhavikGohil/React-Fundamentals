@@ -1,32 +1,250 @@
 {
   "customers": [
     {
+      "id": "1",
       "name": "John AB",
       "email": "john@example.com",
       "phone": "9832032030",
       "status": "active",
-      "id": "1"
+      "isArchived": true,
+      "revenue": 120000,
+      "createdBy": "Admin",
+      "updatedBy": "Admin",
+      "createdAt": "2026-06-01T10:00:00Z",
+      "updatedAt": "2026-06-03T12:40:43.031Z"
     },
     {
       "id": "2",
       "name": "Priya Sharma",
       "email": "priya@example.com",
       "phone": "9876543211",
-      "status": "inactive"
+      "status": "inactive",
+      "isArchived": false,
+      "revenue": 85000,
+      "createdBy": "Admin",
+      "updatedBy": "Admin",
+      "createdAt": "2026-06-01T10:30:00Z",
+      "updatedAt": "2026-06-03T10:00:00Z"
     },
     {
+      "id": "RKcnEQf6EOo",
       "name": "Rishi",
       "email": "rishi@mail.com",
       "phone": "9539512525",
-      "status": "active",
-      "id": "RKcnEQf6EOo"
+      "status": "inactive",
+      "isArchived": false,
+      "revenue": 65000,
+      "createdBy": "Admin",
+      "updatedBy": "Admin",
+      "createdAt": "2026-06-02T09:00:00Z",
+      "updatedAt": "2026-06-03T12:35:18.449Z"
     },
     {
+      "id": "bw60EppdDkU",
       "name": "Nikunj",
       "email": "nikunj@mail.com",
       "phone": "9874561212",
-      "status": "inactive",
-      "id": "bw60EppdDkU"
+      "status": "active",
+      "isArchived": false,
+      "revenue": 40000,
+      "createdBy": "Admin",
+      "updatedBy": "Admin",
+      "createdAt": "2026-06-02T11:00:00Z",
+      "updatedAt": "2026-06-03T12:35:26.738Z"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "contact-1",
+      "customerId": "1",
+      "name": "John AB",
+      "email": "john@example.com",
+      "phone": "9832032030",
+      "type": "primary"
+    },
+    {
+      "id": "contact-2",
+      "customerId": "2",
+      "name": "Priya Sharma",
+      "email": "priya@example.com",
+      "phone": "9876543211",
+      "type": "billing"
+    },
+    {
+      "id": "contact-3",
+      "customerId": "RKcnEQf6EOo",
+      "name": "Rishi",
+      "email": "rishi@mail.com",
+      "phone": "9539512525",
+      "type": "technical"
+    },
+    {
+      "name": "Head Office",
+      "email": "john@example.com",
+      "phone": "9876543210",
+      "type": "primary",
+      "customerId": "1",
+      "id": "Zn7Oa300UG8"
+    }
+  ],
+  "activities": [
+    {
+      "id": "activity-1",
+      "customerId": "1",
+      "type": "call",
+      "title": "Introductory call",
+      "description": "Discussed customer requirements and onboarding.",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-01T11:00:00Z"
+    },
+    {
+      "id": "activity-2",
+      "customerId": "2",
+      "type": "email",
+      "title": "Follow-up email",
+      "description": "Sent proposal and pricing details.",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-02T12:00:00Z"
+    },
+    {
+      "id": "activity-3",
+      "customerId": "RKcnEQf6EOo",
+      "type": "meeting",
+      "title": "Product demo",
+      "description": "Completed demo for CRM workflow.",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T09:30:00Z"
+    },
+    {
+      "type": "call",
+      "title": "Team Call",
+      "description": "Daily Team meeting",
+      "customerId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T12:35:02.470Z",
+      "id": "AkigIcBVrjU"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notification-1",
+      "title": "New customer added",
+      "message": "Rishi was added successfully.",
+      "isRead": false,
+      "createdAt": "2026-06-02T09:00:00Z"
+    },
+    {
+      "id": "notification-2",
+      "title": "Customer updated",
+      "message": "John AB profile was updated.",
+      "isRead": true,
+      "createdAt": "2026-06-03T10:00:00Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "audit-1",
+      "action": "CREATE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-01T10:00:00Z"
+    },
+    {
+      "id": "audit-2",
+      "action": "CREATE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "2",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-01T10:30:00Z"
+    },
+    {
+      "id": "audit-3",
+      "action": "UPDATE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T10:00:00Z"
+    },
+    {
+      "action": "UPDATE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T12:30:52.085Z",
+      "id": "0Hd_bEwnO14"
+    },
+    {
+      "action": "UPDATE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T12:34:33.943Z",
+      "id": "4iI_pO1_-rI"
+    },
+    {
+      "action": "UPDATE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "RKcnEQf6EOo",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T12:35:18.471Z",
+      "id": "s0GQKsU_GtM"
+    },
+    {
+      "action": "UPDATE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "bw60EppdDkU",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T12:35:26.761Z",
+      "id": "QKeAUlWrq8I"
+    },
+    {
+      "action": "ARCHIVE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T12:35:43.143Z",
+      "id": "NQevHYrVhuU"
+    },
+    {
+      "action": "RESTORE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T12:35:48.474Z",
+      "id": "EtlR2x1E_Kw"
+    },
+    {
+      "action": "ARCHIVE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T12:35:55.675Z",
+      "id": "qjlg3TKRaIE"
+    },
+    {
+      "action": "RESTORE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T12:35:59.127Z",
+      "id": "QUAXsgQVirI"
+    },
+    {
+      "action": "UPDATE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T12:36:07.226Z",
+      "id": "LlXcr0zmSW8"
+    },
+    {
+      "action": "ARCHIVE_CUSTOMER",
+      "entity": "Customer",
+      "entityId": "1",
+      "createdBy": "Admin",
+      "createdAt": "2026-06-03T12:40:43.055Z",
+      "id": "YJaOpXsSWQA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

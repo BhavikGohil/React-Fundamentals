@@ -6,6 +6,12 @@ export interface Customer {
   email: string;
   phone: string;
   status: CustomerStatus;
+  isArchived: boolean;
+  revenue: number;
+  createdBy: string;
+  updatedBy: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface CustomerFormValues {
@@ -13,6 +19,7 @@ export interface CustomerFormValues {
   email: string;
   phone: string;
   status: CustomerStatus;
+  revenue: number;
 }
 
 export interface CustomerState {

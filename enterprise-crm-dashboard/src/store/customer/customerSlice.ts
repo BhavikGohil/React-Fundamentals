@@ -1,10 +1,12 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { type CustomerState } from "../../types/customerTypes";
+import type { CustomerState } from "../../types/customerTypes";
 import {
   addCustomer,
+  archiveCustomer,
   deleteCustomer,
   fetchCustomerById,
   fetchCustomers,
+  restoreCustomer,
   updateCustomer,
 } from "./customerThunk";
 
@@ -33,6 +35,9 @@ const customerSlice = createSlice({
     clearSelectedCustomer: (state) => {
       state.selectedCustomer = null;
     },
+    clearCustomerError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -49,8 +54,17 @@ const customerSlice = createSlice({
         state.error = action.payload as string;
       })
 
+      .addCase(fetchCustomerById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
       .addCase(fetchCustomerById.fulfilled, (state, action) => {
+        state.loading = false;
         state.selectedCustomer = action.payload;
+      })
+      .addCase(fetchCustomerById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       })
 
       .addCase(addCustomer.fulfilled, (state, action) => {
@@ -58,6 +72,30 @@ const customerSlice = createSlice({
       })
 
       .addCase(updateCustomer.fulfilled, (state, action) => {
+        const index = state.customers.findIndex(
+          (customer) => customer.id === action.payload.id
+        );
+
+        if (index !== -1) {
+          state.customers[index] = action.payload;
+        }
+
+        state.selectedCustomer = action.payload;
+      })
+
+      .addCase(archiveCustomer.fulfilled, (state, action) => {
+        const index = state.customers.findIndex(
+          (customer) => customer.id === action.payload.id
+        );
+
+        if (index !== -1) {
+          state.customers[index] = action.payload;
+        }
+
+        state.selectedCustomer = action.payload;
+      })
+
+      .addCase(restoreCustomer.fulfilled, (state, action) => {
         const index = state.customers.findIndex(
           (customer) => customer.id === action.payload.id
         );
@@ -81,6 +119,7 @@ export const {
   setSearchTerm,
   setStatusFilter,
   clearSelectedCustomer,
+  clearCustomerError,
 } = customerSlice.actions;
 
 export default customerSlice.reducer;

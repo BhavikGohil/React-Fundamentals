@@ -1,10 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { AuthState } from "../../types/authTypes";
-import { loginUser } from "./authThunk";
+import type { AuthState, AuthUser } from "../../types/authTypes";
+import { loginUser, refreshUserToken } from "./authThunk";
+
+const getStoredUser = (): AuthUser | null => {
+  const user = localStorage.getItem("user");
+  if (!user) {
+    return null;
+  }
+  try {
+    return JSON.parse(user) as AuthUser;
+  } catch {
+    localStorage.removeItem("user");
+    return null;
+  }
+};
 
 const initialState: AuthState = {
-  user: JSON.parse(localStorage.getItem("user") || "null"),
+  user: getStoredUser(),
   token: localStorage.getItem("token"),
+  refreshToken: localStorage.getItem("refreshToken"),
   loading: false,
   error: null,
 };
@@ -16,8 +30,15 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.token = null;
+      state.refreshToken = null;
+      state.error = null;
+
       localStorage.removeItem("user");
       localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
+    },
+    clearAuthError: (state) => {
+      state.error = null;
     },
   },
 
@@ -31,17 +52,30 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.refreshToken = action.payload.refreshToken;
 
         localStorage.setItem("user", JSON.stringify(action.payload.user));
         localStorage.setItem("token", action.payload.token);
+        localStorage.setItem("token", action.payload.refreshToken);
       })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error=action.payload as string;
+      .addCase(refreshUserToken.fulfilled, (state, action) => {
+        state.token = action.payload;
+        localStorage.setItem("token", action.payload);
+      })
+
+      .addCase(refreshUserToken.rejected, (state, action) => {
+        state.user = null;
+        state.token = null;
+        state.refreshToken = null;
+        state.error = action.payload as string;
+
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
       });
   },
 });
 
-export const {logout} =authSlice.actions;
+export const { logout,clearAuthError } = authSlice.actions;
 
 export default authSlice.reducer;
