@@ -1,23 +1,37 @@
-import api from "./api";
-import type { Activity, ActivityFormValues } from "../types/activityTypes";
+import type { ActivityFormValues } from "../types/activityTypes";
+import { supabase } from "./supabaseClient";
+import { mapActivity } from "./supabaseMappers";
+
+const throwIfError = (error: unknown) => {
+  if (error) throw (error as { message: string }).message;
+};
 
 export const activityService = {
   getByCustomerId: async (customerId: string) => {
-    const response = await api.get<Activity[]>(
-      `/activities?customerId=${customerId}&_sort=createdAt&_order=desc`
-    );
+    const { data, error } = await supabase
+      .from("activities")
+      .select("*")
+      .eq("customer_id", customerId)
+      .order("created_at", { ascending: false });
 
-    return response.data;
+    throwIfError(error);
+    return (data || []).map(mapActivity);
   },
 
   create: async (customerId: string, values: ActivityFormValues) => {
-    const response = await api.post<Activity>("/activities", {
-      ...values,
-      customerId,
-      createdBy: "Admin",
-      createdAt: new Date().toISOString(),
-    });
+    const { data, error } = await supabase
+      .from("activities")
+      .insert({
+        customer_id: customerId,
+        type: values.type,
+        title: values.title,
+        description: values.description,
+        created_by: "Admin",
+      })
+      .select()
+      .single();
 
-    return response.data;
+    throwIfError(error);
+    return mapActivity(data);
   },
 };

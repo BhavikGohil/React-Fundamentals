@@ -1,49 +1,47 @@
-import api from "./api";
 import type { AppNotification } from "../types/notificationTypes";
+import { supabase } from "./supabaseClient";
+import { mapNotification } from "./supabaseMappers";
+
+const throwIfError = (error: unknown) => {
+  if (error) throw (error as { message: string }).message;
+};
 
 export const notificationService = {
   getAll: async () => {
-    const response = await api.get<AppNotification[]>("/notifications");
-
-    return response.data.sort(
-      (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
+    const { data, error } = await supabase.from("notifications").select("*").order("created_at", { ascending: false });
+    throwIfError(error);
+    return (data || []).map(mapNotification);
   },
 
   create: async (notification: Omit<AppNotification, "id" | "createdAt">) => {
-    const response = await api.post<AppNotification>("/notifications", {
-      ...notification,
-      createdAt: new Date().toISOString(),
-    });
+    const { data, error } = await supabase
+      .from("notifications")
+      .insert({ title: notification.title, message: notification.message, is_read: notification.isRead })
+      .select()
+      .single();
 
-    return response.data;
+    throwIfError(error);
+    return mapNotification(data);
   },
 
   markAsRead: async (notification: AppNotification) => {
-    const response = await api.patch<AppNotification>(
-      `/notifications/${notification.id}`,
-      {
-        isRead: true,
-      }
-    );
+    const { data, error } = await supabase
+      .from("notifications")
+      .update({ is_read: true })
+      .eq("id", notification.id)
+      .select()
+      .single();
 
-    return response.data;
+    throwIfError(error);
+    return mapNotification(data);
   },
 
   markAllAsRead: async (notifications: AppNotification[]) => {
-    const unreadNotifications = notifications.filter(
-      (notification) => !notification.isRead
-    );
+    const ids = notifications.filter((n) => !n.isRead).map((n) => n.id);
+    if (ids.length === 0) return [];
 
-    await Promise.all(
-      unreadNotifications.map((notification) =>
-        api.patch(`/notifications/${notification.id}`, {
-          isRead: true,
-        })
-      )
-    );
-
-    return unreadNotifications.map((notification) => notification.id);
+    const { error } = await supabase.from("notifications").update({ is_read: true }).in("id", ids);
+    throwIfError(error);
+    return ids;
   },
 };

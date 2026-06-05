@@ -2,7 +2,7 @@ export type ContactType = "primary" | "billing" | "technical";
 
 export interface Contact {
   id: string;
-  customerId: string;
+  customer_id: string;
   name: string;
   email: string;
   phone: string;

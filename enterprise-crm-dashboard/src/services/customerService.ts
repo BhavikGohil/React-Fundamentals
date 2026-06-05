@@ -1,68 +1,75 @@
 import type { Customer, CustomerFormValues } from "../types/customerTypes";
-import api from "./api";
+import { mapCustomer, toCustomerRow } from "./supabaseMappers";
+import { supabase } from "./supabaseClient";
+
+const throwIfError = (error: unknown) => {
+  if (error) throw (error as { message: string }).message;
+};
 
 export const customerService = {
-  
   getAll: async () => {
-    const response = await api.get<Customer[]>("/customers");
-    return response.data;
+    const { data, error } = await supabase.from("customers").select("*").order("created_at", { ascending: false });
+    throwIfError(error);
+    return (data || []).map(mapCustomer);
   },
 
   getById: async (id: string) => {
-    const response = await api.get<Customer>(`/customers/${id}`);
-    return response.data;
+    const { data, error } = await supabase.from("customers").select("*").eq("id", id).single();
+    throwIfError(error);
+    return mapCustomer(data);
   },
 
   create: async (customer: CustomerFormValues) => {
     const now = new Date().toISOString();
+    const { data, error } = await supabase
+      .from("customers")
+      .insert(toCustomerRow({ ...customer, isArchived: false, createdBy: "Admin", updatedBy: "Admin", createdAt: now, updatedAt: now }))
+      .select()
+      .single();
 
-    const response = await api.post<Customer>("/customers", {
-      ...customer,
-      isArchived: false,
-      createdBy: "Admin",
-      updatedBy: "Admin",
-      createdAt: now,
-      updatedAt: now,
-    });
-
-    return response.data;
+    throwIfError(error);
+    return mapCustomer(data);
   },
 
   update: async (customer: Customer) => {
-    const now = new Date().toISOString();
-    const response = await api.put<Customer>(`/customers/${customer.id}`, {
-      ...customer,
-      updatedBy: "Admin",
-      updatedAt: now,
-    });
+    const { data, error } = await supabase
+      .from("customers")
+      .update(toCustomerRow({ ...customer, updatedBy: "Admin", updatedAt: new Date().toISOString() }))
+      .eq("id", customer.id)
+      .select()
+      .single();
 
-    return response.data;
+    throwIfError(error);
+    return mapCustomer(data);
   },
 
   archive: async (customer: Customer) => {
-    const now = new Date().toISOString();
-    const response = await api.patch<Customer>(`/customers/${customer.id}`, {
-      isArchived: true,
-      updatedBy: "Admin",
-      updatedAt: now,
-    });
+    const { data, error } = await supabase
+      .from("customers")
+      .update({ is_archived: true, updated_by: "Admin", updated_at: new Date().toISOString() })
+      .eq("id", customer.id)
+      .select()
+      .single();
 
-    return response.data;
+    throwIfError(error);
+    return mapCustomer(data);
   },
 
   restore: async (customer: Customer) => {
-    const now = new Date().toISOString();
-    const response = await api.patch<Customer>(`/customers/${customer.id}`, {
-      isArchived: false,
-      updatedBy: "Admin",
-      updatedAt: now,
-    });
+    const { data, error } = await supabase
+      .from("customers")
+      .update({ is_archived: false, updated_by: "Admin", updated_at: new Date().toISOString() })
+      .eq("id", customer.id)
+      .select()
+      .single();
 
-    return response.data;
+    throwIfError(error);
+    return mapCustomer(data);
   },
 
   remove: async (id: string) => {
-    await api.delete(`/customers/${id}`);
+    const { error } = await supabase.from("customers").delete().eq("id", id);
+    throwIfError(error);
     return id;
   },
 };
