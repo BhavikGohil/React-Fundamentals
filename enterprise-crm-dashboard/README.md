@@ -1,12 +1,39 @@
 # Enterprise CRM Dashboard
 
+![Enterprise CRM Dashboard](./docs/preview.png)
+
+<p align="center">
+  <a href="https://enterprise-crm-tau.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge" alt="Live Demo">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://enterprise-crm-tau.vercel.app/" target="_blank">
+    https://enterprise-crm-tau.vercel.app/
+  </a>
+</p>
+
+![React](https://img.shields.io/badge/React-19-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![Redux Toolkit](https://img.shields.io/badge/Redux%20Toolkit-State%20Management-purple)
+![Formik](https://img.shields.io/badge/Formik-Forms-orange)
+![Zod](https://img.shields.io/badge/Zod-Validation-green)
+![Vercel](https://img.shields.io/badge/Hosted%20On-Vercel-black)
+
 A production-ready Customer Relationship Management (CRM) platform built with React, TypeScript, Redux Toolkit, Axios, Formik, and Zod. The application enables organizations to manage customers, contacts, activities, notifications, audit logs, and business analytics through a scalable and maintainable architecture.
+
+---
+
+## Live Demo
+
+🔗 https://enterprise-crm-tau.vercel.app/
 
 ---
 
 ## Overview
 
-This project demonstrates both **React Fundamentals** and **Enterprise-Level React Development Patterns** commonly used in modern SaaS applications.
+This project demonstrates both React Fundamentals and Enterprise-Level React Development Patterns commonly used in modern SaaS applications.
 
 The application is designed with reusable components, centralized state management, secure authentication, API abstraction, performance optimization, and scalable folder architecture.
 
@@ -56,8 +83,6 @@ Track customer interactions:
 
 ### Audit Logs
 
-Track system activities:
-
 * Created By
 * Updated By
 * Updated Date
@@ -76,8 +101,6 @@ Track system activities:
 ---
 
 ## React Concepts Applied
-
-This project applies core React concepts through real-world enterprise development patterns.
 
 ### React Fundamentals
 
@@ -120,8 +143,6 @@ This project applies core React concepts through real-world enterprise developme
 
 ## State Management
 
-Implemented using Redux Toolkit.
-
 ### Redux Toolkit
 
 * createSlice
@@ -140,8 +161,6 @@ Implemented using Redux Toolkit.
 
 ## API Layer
 
-Centralized API communication using Axios.
-
 ### Features
 
 * Axios Instance
@@ -156,10 +175,6 @@ Centralized API communication using Axios.
 
 ## Custom Hooks
 
-Reusable hooks created for application-wide functionality.
-
-### Hooks
-
 * useAuth
 * usePagination
 * useDebounce
@@ -168,8 +183,6 @@ Reusable hooks created for application-wide functionality.
 ---
 
 ## Performance Optimization
-
-Implemented to improve rendering efficiency and application scalability.
 
 ### Techniques
 
@@ -232,11 +245,7 @@ src/
 ├── utils/
 ├── store/
 │   ├── auth/
-│   │   ├── authSlice.ts
-│   │   ├── authThunk.ts
 │   ├── customer/
-│   │   ├── customerSlice.ts
-│   │   ├── customerThunk.ts
 │   ├── notification/
 │   └── index.ts
 ├── App.tsx
@@ -265,21 +274,9 @@ src/
 
 ## Installation
 
-### Clone Repository
-
 ```bash
 git clone <repository-url>
-```
-
-### Install Dependencies
-
-```bash
 npm install
-```
-
-### Start Development Server
-
-```bash
 npm run dev
 ```
 
@@ -295,8 +292,6 @@ npm run build
 
 ## Learning Objectives
 
-This project was built to gain hands-on experience with:
-
 * React Fundamentals
 * TypeScript
 * React Router
@@ -310,12 +305,14 @@ This project was built to gain hands-on experience with:
 
 ---
 
-## Client Interview Explanation
+## Project Showcase
 
-I developed an enterprise-level CRM platform using React, TypeScript, Redux Toolkit, Axios, Formik, and Zod. The application provides customer management, contact management, activity tracking, notifications, audit logs, and business analytics dashboards.
+This enterprise CRM platform was developed using React, TypeScript, Redux Toolkit, Axios, Formik, and Zod.
 
-State management is implemented using Redux Toolkit with createSlice and createAsyncThunk, while API communication is centralized through a reusable Axios service layer with request/response interceptors, token refresh handling, and global error management.
+The application provides customer management, contact management, activity tracking, notifications, audit logs, and dashboard analytics through a scalable and maintainable architecture.
 
-The application follows a modular architecture with reusable components, custom hooks, protected routes, role-based access control, and performance optimization techniques such as useMemo, useCallback, React.memo, lazy loading, and code splitting.
+State management is implemented using Redux Toolkit with createSlice and createAsyncThunk, while API communication is centralized through a reusable Axios service layer with request and response interceptors, token refresh handling, and global error management.
 
-The overall design focuses on scalability, maintainability, security, and enterprise-grade development practices commonly used in production React applications.
+The project follows enterprise development standards including reusable components, custom hooks, protected routes, role-based access control, modular architecture, and performance optimization using useMemo, useCallback, React.memo, lazy loading, and code splitting.
+
+The overall solution focuses on scalability, maintainability, security, and real-world enterprise application development practices.
